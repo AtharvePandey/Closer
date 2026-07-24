@@ -45,16 +45,14 @@ class ProfilePage extends StatelessWidget {
                 height: 88,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: const LinearGradient(
-                    colors: [kPurple, kPink],
-                  ),
+                  gradient: kBrandGradient,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(4),
                   child: Container(
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
-                      color: kSurface,
+                      color: kBackground,
                     ),
                     child: const Center(
                       child: Text(
@@ -76,37 +74,21 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Text(
-                          "closer",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        const Text("closer", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                         const SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: kPurple,
+                          decoration: BoxDecoration(
+                            gradient: kBrandGradient,
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(
-                            Icons.check,
-                            size: 16,
-                            color: Colors.white,
-                          ),
+                          child: const Icon(Icons.check, size: 16, color: Colors.white),
                         ),
                       ],
                     ),
-                    const Text(
-                      "@closer",
-                      style: TextStyle(color: Colors.white70),
-                    ),
+                    const Text("@closer", style: TextStyle(color: Colors.white70)),
                     const SizedBox(height: 4),
-                    const Text(
-                      "Followed by athletes, creators, and fans",
-                      style: TextStyle(fontSize: 15),
-                    ),
+                    const Text("Followed by athletes, creators, and fans", style: TextStyle(fontSize: 15)),
                   ],
                 ),
               ),
@@ -125,38 +107,16 @@ class ProfilePage extends StatelessWidget {
           Expanded(
             child: Container(
               height: 52,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [kPurple, kPink]),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: const Center(
-                child: Text(
-                  "Following",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
+              decoration: BoxDecoration(gradient: kBrandGradient, borderRadius: BorderRadius.circular(30)),
+              child: const Center(child: Text("Following", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
             ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Container(
               height: 52,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.white24),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: const Center(
-                child: Text(
-                  "Message",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
+              decoration: BoxDecoration(border: Border.all(color: Colors.white24), borderRadius: BorderRadius.circular(30)),
+              child: const Center(child: Text("Message", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
             ),
           ),
         ],
@@ -188,34 +148,20 @@ class ProfilePage extends StatelessWidget {
                 Container(
                   width: 68,
                   height: 68,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: kPurple.withOpacity(0.3)),
-                  ),
+                  decoration: BoxDecoration(shape: BoxShape.circle, gradient: kBrandGradient),
                   child: Center(
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Icon(
-                          item["icon"] as IconData,
-                          size: 34,
-                          color: Colors.white,
-                        ),
+                        Icon(item["icon"] as IconData, size: 34, color: Colors.white),
                         if (item["live"] == true)
                           Positioned(
                             top: 4,
                             right: 4,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 6, vertical: 1),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: const Text(
-                                "LIVE",
-                                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(12)),
+                              child: const Text("LIVE", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
                             ),
                           ),
                       ],
@@ -223,11 +169,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                Text(
-                  item["label"] as String,
-                  style: const TextStyle(fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
+                Text(item["label"] as String, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center),
               ],
             ),
           );
@@ -239,14 +181,12 @@ class ProfilePage extends StatelessWidget {
   Widget _buildTabBar() {
     return Container(
       height: 50,
-      decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.white.withOpacity(0.1))),
-      ),
+      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white.withOpacity(0.1)))),
       child: DefaultTabController(
         length: 5,
         child: TabBar(
           isScrollable: true,
-          indicatorColor: kPurple,
+          indicator: BoxDecoration(borderRadius: BorderRadius.circular(20), gradient: kBrandGradient),
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
           tabs: const [
@@ -266,76 +206,13 @@ class ProfilePage extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          // Row 1
-          Row(
-            children: [
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/athlete_lifting.jpg", // replace with your images
-                  label: "LEVEL UP\nYOUR NAME. YOUR BRAND. YOUR FUTURE.",
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/podcast.jpg",
-                  label: "",
-                  isPodcast: true,
-                ),
-              ),
-            ],
-          ),
+          Row(children: [Expanded(child: _ContentCard(label: "LEVEL UP\nYOUR NAME. YOUR BRAND. YOUR FUTURE.")), const SizedBox(width: 12), Expanded(child: _ContentCard(isPodcast: true))]),
           const SizedBox(height: 12),
-          // Row 2
-          Row(
-            children: [
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/ask_anything.jpg",
-                  label: "ASK US ANYTHING",
-                  subtitle: "EVERY WEDNESDAY\n7PM ET / 4PM PT",
-                  isLive: true,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/group.jpg",
-                  label: "",
-                ),
-              ),
-            ],
-          ),
+          Row(children: [Expanded(child: _ContentCard(label: "ASK US ANYTHING", subtitle: "EVERY WEDNESDAY\n7PM ET / 4PM PT", isLive: true)), const SizedBox(width: 12), Expanded(child: _ContentCard())]),
           const SizedBox(height: 12),
-          // Row 3
-          Row(
-            children: [
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/basketball.jpg",
-                  label: "",
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/interview.jpg",
-                  label: "",
-                ),
-              ),
-            ],
-          ),
+          Row(children: [Expanded(child: _ContentCard()), const SizedBox(width: 12), Expanded(child: _ContentCard())]),
           const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: _ContentCard(
-                  image: "assets/team.jpg",
-                  label: "",
-                ),
-              ),
-            ],
-          ),
+          Row(children: [Expanded(child: _ContentCard())]),
         ],
       ),
     );
@@ -343,63 +220,28 @@ class ProfilePage extends StatelessWidget {
 }
 
 class _ContentCard extends StatelessWidget {
-  final String image;
   final String label;
   final String? subtitle;
   final bool isLive;
   final bool isPodcast;
 
-  const _ContentCard({
-    super.key,
-    required this.image,
-    required this.label,
-    this.subtitle,
-    this.isLive = false,
-    this.isPodcast = false,
-  });
+  const _ContentCard({super.key, this.label = "", this.subtitle, this.isLive = false, this.isPodcast = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 220,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: kSurface,
-        image: DecorationImage(
-          image: const AssetImage("assets/placeholder.jpg"), // use real images later
-          fit: BoxFit.cover,
-        ),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), gradient: kBrandGradient),
       child: Stack(
         children: [
           if (isLive)
-            Positioned(
-              top: 12,
-              left: 12,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Text("LIVE Q&A", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-              ),
-            ),
+            Positioned(top: 12, left: 12, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(20)), child: const Text("LIVE Q&A", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)))),
+          if (isPodcast)
+            Positioned(top: 12, left: 12, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.purple, borderRadius: BorderRadius.circular(20)), child: const Text("PODCAST", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)))),
           if (label.isNotEmpty)
-            Positioned(
-              bottom: 16,
-              left: 16,
-              right: 16,
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  height: 1.2,
-                ),
-              ),
-            ),
-          // Add more overlays as needed from the screenshot
+            Positioned(bottom: 16, left: 16, right: 16, child: Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, height: 1.2, color: Colors.white))),
+          if (subtitle != null)
+            Positioned(bottom: 16, left: 16, right: 16, child: Text(subtitle!, style: const TextStyle(fontSize: 13, color: Colors.white70, height: 1.3))),
         ],
       ),
     );
