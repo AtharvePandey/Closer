@@ -1,32 +1,6 @@
+// lib/home_page.dart
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const CloserApp());
-}
-
-const Color kBackground = Color(0xFF090909);
-const Color kSurface = Color(0xFF151515);
-const Color kPurple = Color(0xFF9C4DFF);
-const Color kPink = Color(0xFFFF4FA6);
-
-class CloserApp extends StatelessWidget {
-  const CloserApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Closer",
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: kBackground,
-        fontFamily: "Roboto",
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
-    );
-  }
-}
+import 'main.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,8 +10,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int selectedIndex = 0;
-
   final stories = [
     "Your Circle",
     "Creator Picks",
@@ -55,14 +27,10 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            buildHeader(),
-
+            _buildHeader(),
             const SizedBox(height: 10),
-
-            buildStories(),
-
+            _buildStories(),
             const SizedBox(height: 15),
-
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.only(bottom: 30),
@@ -80,11 +48,10 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: buildBottomBar(),
     );
   }
 
-  Widget buildHeader() {
+  Widget _buildHeader() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
       child: Row(
@@ -140,7 +107,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildStories() {
+  Widget _buildStories() {
     return SizedBox(
       height: 120,
       child: ListView.builder(
@@ -152,84 +119,6 @@ class _HomePageState extends State<HomePage> {
             onTap: () {},
           );
         },
-      ),
-    );
-  }
-
-  Widget buildBottomBar() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFF101010),
-        border: Border(
-          top: BorderSide(
-            color: Colors.white10,
-          ),
-        ),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          BottomButton(
-            icon: Icons.home_outlined,
-            label: "Home",
-            selected: selectedIndex == 0,
-            onTap: () {
-              setState(() => selectedIndex = 0);
-            },
-          ),
-          BottomButton(
-            icon: Icons.explore_outlined,
-            label: "Explore",
-            selected: selectedIndex == 1,
-            onTap: () {
-              setState(() => selectedIndex = 1);
-            },
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: const LinearGradient(
-                  colors: [kPurple, kPink],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: kPurple.withOpacity(.35),
-                    blurRadius: 15,
-                  )
-                ],
-              ),
-              child: Container(
-                margin: const EdgeInsets.all(3),
-                decoration: const BoxDecoration(
-                  color: kBackground,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.add, size: 36),
-              ),
-            ),
-          ),
-          BottomButton(
-            icon: Icons.chat_bubble_outline,
-            label: "Chats",
-            selected: selectedIndex == 3,
-            onTap: () {
-              setState(() => selectedIndex = 3);
-            },
-          ),
-          BottomButton(
-            icon: Icons.person_outline,
-            label: "Profile",
-            selected: selectedIndex == 4,
-            onTap: () {
-              setState(() => selectedIndex = 4);
-            },
-          ),
-        ],
       ),
     );
   }
@@ -259,9 +148,7 @@ class StoryBubble extends StatelessWidget {
                 padding: const EdgeInsets.all(3),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: [kPurple, kPink],
-                  ),
+                  gradient: LinearGradient(colors: [kPurple, kPink]),
                 ),
                 child: Container(
                   width: 72,
@@ -366,10 +253,7 @@ class FeedCard extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 caption,
-                style: const TextStyle(
-                  fontSize: 20,
-                  height: 1.5,
-                ),
+                style: const TextStyle(fontSize: 20, height: 1.5),
               ),
               const SizedBox(height: 16),
               Row(
@@ -395,48 +279,6 @@ class FeedCard extends StatelessWidget {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class BottomButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  const BottomButton({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final color = selected ? kPurple : Colors.white70;
-
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(18),
-      child: SizedBox(
-        width: 70,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: color),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(
-                color: color,
-                fontSize: 12,
-              ),
-            )
-          ],
         ),
       ),
     );
