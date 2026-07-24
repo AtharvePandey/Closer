@@ -7,10 +7,20 @@ void main() {
   runApp(const CloserApp());
 }
 
-const Color kBackground = Color(0xFF090909);
+const Color kBackground = Color(0xFF000000);
 const Color kSurface = Color(0xFF151515);
-const Color kPurple = Color(0xFF9C4DFF);
-const Color kPink = Color(0xFFFF4FA6);
+
+final LinearGradient kBrandGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  colors: const [
+    Color(0xFF6125E6),
+    Color(0xFF8A29E1),
+    Color(0xFFD831BE),
+    Color(0xFFFB359A),
+  ],
+  stops: const [0.0, 0.3, 0.68, 1.0],
+);
 
 class CloserApp extends StatelessWidget {
   const CloserApp({super.key});
@@ -61,9 +71,7 @@ class _MainScreenState extends State<MainScreen> {
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFF101010),
-        border: Border(
-          top: BorderSide(color: Colors.white10),
-        ),
+        border: Border(top: BorderSide(color: Colors.white10)),
       ),
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -88,11 +96,11 @@ class _MainScreenState extends State<MainScreen> {
               height: 70,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const LinearGradient(colors: [kPurple, kPink]),
+                gradient: kBrandGradient,
                 boxShadow: [
                   BoxShadow(
-                    color: kPurple.withOpacity(0.35),
-                    blurRadius: 15,
+                    color: const Color(0xFF6125E6).withOpacity(0.5),
+                    blurRadius: 20,
                   )
                 ],
               ),
@@ -139,7 +147,7 @@ class _BottomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? kPurple : Colors.white70;
+    final color = selected ? const Color(0xFF8A29E1) : Colors.white70;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(18),
@@ -150,10 +158,7 @@ class _BottomButton extends StatelessWidget {
           children: [
             Icon(icon, color: color),
             const SizedBox(height: 4),
-            Text(
-              label,
-              style: TextStyle(color: color, fontSize: 12),
-            )
+            Text(label, style: TextStyle(color: color, fontSize: 12)),
           ],
         ),
       ),
@@ -169,10 +174,7 @@ class PlaceholderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 32, color: Colors.white70),
-        ),
+        child: Text(title, style: const TextStyle(fontSize: 32, color: Colors.white70)),
       ),
     );
   }

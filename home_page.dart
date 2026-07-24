@@ -62,23 +62,19 @@ class _HomePageState extends State<HomePage> {
           ),
           const Spacer(),
           ShaderMask(
-            shaderCallback: (bounds) {
-              return const LinearGradient(
-                colors: [kPurple, kPink],
-              ).createShader(bounds);
-            },
-            child: const Icon(
-              Icons.chat_bubble,
-              color: Colors.white,
-              size: 36,
-            ),
+            shaderCallback: (bounds) => kBrandGradient.createShader(bounds),
+            child: const Icon(Icons.chat_bubble, color: Colors.white, size: 36),
           ),
           const SizedBox(width: 10),
-          const Text(
-            "Closer",
-            style: TextStyle(
-              fontSize: 34,
-              fontWeight: FontWeight.bold,
+          ShaderMask(
+            shaderCallback: (bounds) => kBrandGradient.createShader(bounds),
+            child: const Text(
+              "Closer",
+              style: TextStyle(
+                fontSize: 34,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
           const Spacer(),
@@ -95,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                   width: 10,
                   height: 10,
                   decoration: const BoxDecoration(
-                    color: kPink,
+                    color: Color(0xFFFB359A),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -146,9 +142,9 @@ class StoryBubble extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(3),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(colors: [kPurple, kPink]),
+                  gradient: kBrandGradient,
                 ),
                 child: Container(
                   width: 72,
@@ -208,9 +204,16 @@ class FeedCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundColor: kPurple,
-                    child: Icon(Icons.person),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: kBrandGradient,
+                    ),
+                    padding: const EdgeInsets.all(2),
+                    child: const CircleAvatar(
+                      backgroundColor: kSurface,
+                      child: Icon(Icons.person, color: Colors.white70),
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Text(
@@ -232,22 +235,10 @@ class FeedCard extends StatelessWidget {
                 height: 340,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFF41295a),
-                      Color(0xFF2F0743),
-                      kPink,
-                    ],
-                  ),
+                  gradient: kBrandGradient,
                 ),
                 child: const Center(
-                  child: Icon(
-                    Icons.image,
-                    size: 90,
-                    color: Colors.white30,
-                  ),
+                  child: Icon(Icons.image, size: 90, color: Colors.white30),
                 ),
               ),
               const SizedBox(height: 20),
@@ -258,23 +249,11 @@ class FeedCard extends StatelessWidget {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite_border),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.chat_bubble_outline),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.send),
-                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.chat_bubble_outline)),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
                   const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.bookmark_border),
-                  ),
+                  IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark_border)),
                 ],
               )
             ],
