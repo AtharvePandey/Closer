@@ -11,17 +11,57 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            _buildProfileHeader(),
+            // Top bar (back + notification + more)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_back_ios_new, size: 22),
+                  ),
+                  const Spacer(),
+                  Stack(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.notifications_none, size: 28),
+                      ),
+                      Positioned(
+                        right: 10,
+                        top: 10,
+                        child: Container(
+                          width: 9,
+                          height: 9,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFFB359A),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.more_horiz, size: 28),
+                  ),
+                ],
+              ),
+            ),
+
+            // Profile content
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    _buildProfileHeader(),
+                    const SizedBox(height: 16),
                     _buildActionButtons(),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
                     _buildQuickLinks(),
-                    const SizedBox(height: 16),
-                    _buildTabBar(),
                     const SizedBox(height: 12),
+                    _buildTabBar(),
+                    const SizedBox(height: 8),
                     _buildContentGrid(),
                   ],
                 ),
@@ -35,64 +75,74 @@ class ProfilePage extends StatelessWidget {
 
   Widget _buildProfileHeader() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
-      child: Column(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 88,
-                height: 88,
-                decoration: BoxDecoration(
+          // Avatar with gradient ring
+          Container(
+            width: 92,
+            height: 92,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: kBrandGradient,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(3.5),
+              child: Container(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: kBrandGradient,
+                  color: kBackground,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(4),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: kBackground,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "closer",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                child: const Center(
+                  child: Text(
+                    "closer",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+          const SizedBox(width: 18),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        const Text("closer", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
-                            gradient: kBrandGradient,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(Icons.check, size: 16, color: Colors.white),
-                        ),
-                      ],
+                    const Text(
+                      "closer",
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    const Text("@closer", style: TextStyle(color: Colors.white70)),
-                    const SizedBox(height: 4),
-                    const Text("Followed by athletes, creators, and fans", style: TextStyle(fontSize: 15)),
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        gradient: kBrandGradient,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.check, size: 14, color: Colors.white),
+                    ),
                   ],
                 ),
-              ),
-            ],
+                const Text(
+                  "@closer",
+                  style: TextStyle(color: Colors.white70, fontSize: 15),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  "Followed by athletes, creators, and fans",
+                  style: TextStyle(fontSize: 14, color: Colors.white),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -106,17 +156,33 @@ class ProfilePage extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              height: 52,
-              decoration: BoxDecoration(gradient: kBrandGradient, borderRadius: BorderRadius.circular(30)),
-              child: const Center(child: Text("Following", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+              height: 48,
+              decoration: BoxDecoration(
+                gradient: kBrandGradient,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: const Center(
+                child: Text(
+                  "Following",
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Container(
-              height: 52,
-              decoration: BoxDecoration(border: Border.all(color: Colors.white24), borderRadius: BorderRadius.circular(30)),
-              child: const Center(child: Text("Message", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+              height: 48,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white24, width: 1.5),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: const Center(
+                child: Text(
+                  "Message",
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                ),
+              ),
             ),
           ),
         ],
@@ -126,15 +192,15 @@ class ProfilePage extends StatelessWidget {
 
   Widget _buildQuickLinks() {
     final items = [
-      {"icon": Icons.school, "label": "NIL Tips"},
-      {"icon": Icons.mic, "label": "Live Q&A", "live": true},
-      {"icon": Icons.people, "label": "Creator Help"},
-      {"icon": Icons.badge, "label": "Fan Access"},
-      {"icon": Icons.person, "label": "Athlete Spotlights"},
+      {"icon": Icons.school_outlined, "label": "NIL Tips"},
+      {"icon": Icons.mic_none, "label": "Live Q&A", "live": true},
+      {"icon": Icons.people_outline, "label": "Creator Help"},
+      {"icon": Icons.badge_outlined, "label": "Fan Access"},
+      {"icon": Icons.person_outline, "label": "Athlete Spotlights"},
     ];
 
     return SizedBox(
-      height: 110,
+      height: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -146,30 +212,41 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  width: 68,
-                  height: 68,
-                  decoration: BoxDecoration(shape: BoxShape.circle, gradient: kBrandGradient),
-                  child: Center(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Icon(item["icon"] as IconData, size: 34, color: Colors.white),
-                        if (item["live"] == true)
-                          Positioned(
-                            top: 4,
-                            right: 4,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
-                              decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(12)),
-                              child: const Text("LIVE", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFF6125E6).withOpacity(0.5)),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Icon(item["icon"] as IconData, size: 30, color: Colors.white),
+                      if (item["live"] == true)
+                        Positioned(
+                          top: 2,
+                          right: 2,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Text(
+                              "LIVE",
+                              style: TextStyle(fontSize: 9, fontWeight: FontWeight.bold),
                             ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(item["label"] as String, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center),
+                const SizedBox(height: 6),
+                Text(
+                  item["label"] as String,
+                  style: const TextStyle(fontSize: 11),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           );
@@ -180,15 +257,19 @@ class ProfilePage extends StatelessWidget {
 
   Widget _buildTabBar() {
     return Container(
-      height: 50,
-      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white.withOpacity(0.1)))),
+      height: 44,
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.white.withOpacity(0.08))),
+      ),
       child: DefaultTabController(
         length: 5,
         child: TabBar(
           isScrollable: true,
-          indicator: BoxDecoration(borderRadius: BorderRadius.circular(20), gradient: kBrandGradient),
+          indicatorColor: const Color(0xFF8A29E1),
+          indicatorWeight: 3,
           labelColor: Colors.white,
-          unselectedLabelColor: Colors.white70,
+          unselectedLabelColor: Colors.white60,
+          labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
           tabs: const [
             Tab(text: "Feed"),
             Tab(text: "Live"),
@@ -202,47 +283,65 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildContentGrid() {
+    // 3-column grid matching the screenshot style
     return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Column(
-        children: [
-          Row(children: [Expanded(child: _ContentCard(label: "LEVEL UP\nYOUR NAME. YOUR BRAND. YOUR FUTURE.")), const SizedBox(width: 12), Expanded(child: _ContentCard(isPodcast: true))]),
-          const SizedBox(height: 12),
-          Row(children: [Expanded(child: _ContentCard(label: "ASK US ANYTHING", subtitle: "EVERY WEDNESDAY\n7PM ET / 4PM PT", isLive: true)), const SizedBox(width: 12), Expanded(child: _ContentCard())]),
-          const SizedBox(height: 12),
-          Row(children: [Expanded(child: _ContentCard()), const SizedBox(width: 12), Expanded(child: _ContentCard())]),
-          const SizedBox(height: 12),
-          Row(children: [Expanded(child: _ContentCard())]),
-        ],
-      ),
-    );
-  }
-}
-
-class _ContentCard extends StatelessWidget {
-  final String label;
-  final String? subtitle;
-  final bool isLive;
-  final bool isPodcast;
-
-  const _ContentCard({super.key, this.label = "", this.subtitle, this.isLive = false, this.isPodcast = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 220,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), gradient: kBrandGradient),
-      child: Stack(
-        children: [
-          if (isLive)
-            Positioned(top: 12, left: 12, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(20)), child: const Text("LIVE Q&A", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)))),
-          if (isPodcast)
-            Positioned(top: 12, left: 12, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4), decoration: BoxDecoration(color: Colors.purple, borderRadius: BorderRadius.circular(20)), child: const Text("PODCAST", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)))),
-          if (label.isNotEmpty)
-            Positioned(bottom: 16, left: 16, right: 16, child: Text(label, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, height: 1.2, color: Colors.white))),
-          if (subtitle != null)
-            Positioned(bottom: 16, left: 16, right: 16, child: Text(subtitle!, style: const TextStyle(fontSize: 13, color: Colors.white70, height: 1.3))),
-        ],
+      padding: const EdgeInsets.all(4),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 3,
+          mainAxisSpacing: 3,
+          childAspectRatio: 0.72,
+        ),
+        itemCount: 9,
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              gradient: kBrandGradient,
+            ),
+            child: Stack(
+              children: [
+                // Placeholder content based on index to mimic different cards
+                if (index == 0)
+                  const Positioned(
+                    bottom: 10,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "LEVEL UP\nYOUR NAME.\nYOUR BRAND.",
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1.2),
+                    ),
+                  ),
+                if (index == 2)
+                  Positioned(
+                    top: 10,
+                    left: 10,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Text("LIVE Q&A", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                if (index == 5)
+                  const Positioned(
+                    bottom: 10,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      "VIP DROP\nEXCLUSIVE\nACCESS",
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, height: 1.2),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
